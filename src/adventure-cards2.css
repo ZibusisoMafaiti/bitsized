@@ -1,0 +1,143 @@
+
+
+.wrapper {
+    /* Only contain the card section, not the whole viewport */
+    width: 100%;
+    min-height: 500px; /* Ensure space for the cards to expand */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xxl) 0;
+}
+.adventure-list-container {
+    width: 100%;
+    max-width: 700px; /* Increased max width for a modern look */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.card {
+    height: 100px; /* Slightly taller initial height */
+    border-radius: var(--border-radius-s); /* Use site's border radius */
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    overflow: hidden;
+    margin: var(--spacing-s) 0; /* Use site's spacing */
+    display: flex;
+    align-items: flex-start;
+    transition: .6s cubic-bezier(.28, -0.03, 0, .99);
+    /* Themed shadow, lighter */
+    box-shadow: 0px 8px 15px -5px rgba(0,0,0,0.15); 
+    border: 2px solid var(--color-border); /* Subtle border */
+    background-color: var(--color-background-light); /* Ensure background is white/light */
+}
+/* Styling the "Adventure Card" backgrounds using placeholders that hint at your theme */
+.card[for="c1"] {
+    background-image: url('/images/Gemini_Generated_Image_eyyud8eyyud8eyyu.png');
+}
+.card[for="c2"] {
+    background-image: url('https://placehold.co/700x300/1ca6f3/fff?text=Lesson+2');
+}
+.card[for="c3"] {
+    background-image: url('https://placehold.co/700x300/f3961c/fff?text=Lesson+3');
+}
+.card[for="c4"] {
+    background-image: url('https://placehold.co/700x300/1ca6f3/fff?text=Lesson+4');
+}
+.card[for="c5"] {
+    background-image: url('https://placehold.co/700x300/f3961c/fff?text=Lesson+5');
+}
+
+.card > .column {
+    color: var(--color-primary-text); /* Use dark text color */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    /* Subtle overlay for better text contrast */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0.7) 60%, transparent); 
+    height: 100%;
+}
+.card > .column > .icon {
+    /* Remove dark background and use site colors */
+    background: none; 
+    color: var(--color-background-light); 
+    border-radius: var(--border-radius-circle); 
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: var(--spacing-m);
+    font-size: var(--font-size-l);
+    color: var(--color-background-light);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow for pop effect */
+    transition: all .3s ease;
+}
+.card > .column > .description {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(30px);
+    transition-delay: .3s;
+    transition: all .6s ease;
+    padding: 0 var(--spacing-m) var(--spacing-l);
+    color: var(--color-primary-text);
+}
+.description p {
+    color: var(--color-secondary-text); /* Lighter text for description */
+    padding-top: var(--spacing-xs);
+    font-size: var(--font-size-s);
+}
+.description h4 {
+    text-transform: uppercase;
+    color: var(--color-primary-text);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-m);
+    margin-bottom: var(--spacing-s);
+}
+.start-btn {
+    margin-top: var(--spacing-m);
+    font-size: var(--font-size-s);
+}
+
+input {
+    display: none;
+}
+
+/* State when checked (expanded) */
+input:checked + label {
+    height: 350px; /* Increased expansion height */
+    border-color: var(--color-accent-primary);
+}
+input:checked + label .description {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Animation on hover  */
+.card:hover {
+    transform: scale(1.01);
+}
+
+/* Media Query for Mobile Responsiveness */
+@media (max-width: 600px) {
+    .card {
+        height: 80px;
+    }
+    input:checked + label {
+        height: 250px;
+    }
+    .card > .column > .icon {
+        margin: var(--spacing-s);
+        width: 40px;
+        height: 40px;
+    }
+    .description h4 {
+        font-size: var(--font-size-n);
+    }
+}

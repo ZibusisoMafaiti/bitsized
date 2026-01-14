@@ -1,0 +1,1103 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --color-primary-text: #252525; /* Dark color for main body text */
+    --color-secondary-text: #333;   /* Slightly lighter for other parts of the website*/
+    --color-background-light: #fff; /* White */
+    --color-background-subtle: #faf4f5; 
+    --color-border: #ccc;   
+
+    --color-accent-primary: #f3961c; /*  vibrant Orange (Buttons, main focus) */
+    --color-accent-secondary: #1ca6f3; /* The complementary Azure Blue/Teal (Secondary focus, badges) */
+    --color-accent-danger: #f00; /*For warnings */
+
+    --font-size-xs: 0.8rem;
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;     /* Normal body text size (e.g., 16px) */
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;   /*  for sub-headings */
+    --font-size-xl: 2rem;
+    --font-size-xxl: 2.3rem;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --spacing-xs: 4px;
+    --spacing-s: 8px;
+    --spacing-m: 16px;
+    --spacing-l: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+    --spacing-xxxl: 64px;
+
+    --border-radius-s: 8px;
+    --border-radius-m: 30px;
+    --border-radius-circle: 50%;
+
+    --site-max-width: 1300px;
+
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-n); 
+    color: var(--color-primary-text);
+    line-height: 1.6;
+    background-color: var(--color-background-light);
+}
+h1, h2, h3 {
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-m);
+}
+h1 { font-size: var(--font-size-xxl); }
+h2 { font-size: var(--font-size-xl); margin-top: var(--spacing-l); }
+h3 { font-size: var(--font-size-l); }
+
+a {
+    text-decoration: none;
+    color: var(--color-accent-primary);
+}
+a:hover {
+    color: var(--color-accent-secondary);
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-m); /* horizontal padding for mobile view */
+}
+
+/* Adds vertical spacing between sections */
+.section-padding {
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+}
+
+/* 1. Style for the <span> bars */
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto; /* This spaces them out vertically */
+    
+    /* Use your site's color variables! */
+    background-color: var(--color-primary-text); 
+    
+    /* This makes the animation smooth */
+    transition: all 0.3s ease-in-out;
+}
+
+/* The "X" animation when the button has the 'active' class */
+
+
+.menu-toggle.active .bar:nth-child(2) {
+    /* The middle bar fades out */
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    /* The top bar rotates and moves down */
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    /* The bottom bar rotates and moves up */
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Adds background color for visual segmentation */
+.section-gray {
+    background-color: var(--color-background-subtle);
+}
+header {
+    background-color: var(--color-background-light);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-m) 0;
+}
+
+.logo {
+    font-size: var(--font-size-l);
+    color: var(--color-accent-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+.main-nav ul {
+    display: flex;
+    gap: var(--spacing-l);
+}
+
+.nav-link {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-primary-text);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s;
+}
+
+.nav-link:hover, .nav-link.current {
+    color: var(--color-accent-primary);
+    border-bottom: 2px solid var(--color-accent-primary);
+}
+
+.menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    font-size: var(--font-size-l);
+    cursor: pointer;
+    color: var(--color-primary-text);
+}
+
+.hero-section {
+    position: relative;
+    height: 70vh; /* Responsive height */
+    min-height: 500px;
+    /* background-image: url("images/adorable-girl-being-passionate-about-robotics.jpg");  */
+    
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the left */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background: rgba(0, 0, 0, 0.4); 
+}
+
+.hero-section .section-content {
+    position: relative; /* Brings content above the overlay */
+    z-index: 2;
+   
+}
+.hero-section.container{
+    margin-left: 0;
+    margin-right:auto;
+}
+
+.hero-details {
+    color: var(--color-background-light); /* White text on the dark overlay */
+    max-width: 500px;
+    padding-left: 0;
+}
+
+.hero-details .title {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-s);
+}
+
+.hero-details .subtitle {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-l);
+}
+
+.hero-details .description {
+    font-size: var(--font-size-l);
+    margin-bottom: var(--spacing-xl);
+}
+
+.buttons {
+    display: flex;
+    gap: var(--spacing-m);
+    flex-wrap: wrap; /* Responsive button wrapping */
+}
+/*Buttons*/
+.button {
+    display: inline-block;
+    padding: var(--spacing-s) var(--spacing-l);
+    border-radius: var(--border-radius-m); /* Pill shape */
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.button-primary {
+    background-color: var(--color-accent-primary);
+    color: var(--color-primary-text); /* Accessible dark text on orange */
+    border: 2px solid var(--color-accent-primary);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button-primary:hover {
+    background-color: #e5871b; /* Slightly darker orange */
+    transform: translateY(-2px);
+}
+
+.button-secondary {
+    background-color: transparent;
+    color: var(--color-background-light); /* White text */
+    border: 2px solid var(--color-background-light);
+}
+/* When secondary button is NOT in the hero, use the blue accent */
+.bitsized-description .button-secondary,
+.adventure-snippets .button-secondary,
+.footer-grid .button-secondary {
+    color: var(--color-accent-secondary);
+    border-color: var(--color-accent-secondary);
+}
+
+.button-secondary:hover {
+    background-color: var(--color-background-light);
+    color: var(--color-accent-secondary);
+    transform: translateY(-2px);
+}
+
+
+/* 8. Content Sections */
+
+
+.about-feature {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--spacing-xxl);
+    align-items: flex-start;
+}
+
+.about-feature-heading h2 {
+    
+    margin-top: 0; 
+    margin-bottom: var(--spacing-l);
+}
+
+.discover-link {
+    display: inline-flex; /* flex to align text and icon */
+    align-items: center;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-m);
+    color: var(--color-accent-primary);
+}
+
+.discover-link:hover {
+    color: var(--color-accent-secondary);
+}
+
+.discover-link i {
+    margin-left: var(--spacing-s);
+    transition: transform 0.3s ease; /* Animation: smooth arrow movement */
+}
+
+.discover-link:hover i {
+    transform: translateX(5px); /* Animation: slide arrow on hover */
+}
+.section-lead {
+    font-size: var(--font-size-m);
+    color: var(--color-secondary-text);
+    margin-bottom: var(--spacing-xl);
+}
+
+
+
+/* Adventure Carousel Styling  */
+.adventures-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-l);
+}
+
+.adventure-card {
+    border-radius: var(--border-radius-s);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-background-light);
+}
+
+.adventure__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+figcaption {
+    padding: var(--spacing-m);
+    font-size: var(--font-size-s);
+    color: var(--color-secondary-text);
+    font-weight: var(--font-weight-medium);
+}
+/* 9. Footer */
+footer {
+    background-color: var(--color-primary-text); /* Dark background */
+    color: var(--color-background-light);
+}
+
+footer a {
+    color: var(--color-accent-secondary);
+}
+footer a:hover {
+    color: var(--color-accent-primary);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xxl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.cta-text {
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-s);
+}
+
+.social-tags {
+    display: flex;
+    gap: var(--spacing-m);
+    font-size: var(--font-size-xl);
+    align-items: center;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-s);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.back-to-top {
+    background-color: var(--color-accent-secondary);
+    color: var(--color-background-light);
+    border: none;
+    padding: var(--spacing-s) var(--spacing-m);
+    border-radius: var(--border-radius-m);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.back-to-top:hover {
+    background-color: var(--color-accent-primary);
+}
+/* 10. Media Queries (Mobile Responsiveness) */
+@media (max-width: 900px) {
+    /* Header adjustments for tablet/mobile */
+    
+    .menu-toggle {
+        display: block; /* Show menu icon */
+    }
+    
+    .hero-details {
+        max-width: 100%;
+        padding-left: 0;
+        text-align: center;
+    }
+    .hero-details .title {
+        font-size: var(--font-size-xl);
+    }
+    .hero-details .subtitle {
+        font-size: var(--font-size-l);
+    }
+    .buttons {
+        justify-content: center;
+    }
+    .about-feature {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-l);
+        text-align: center;
+    }
+    .about-feature-heading h2 {
+        margin-bottom: var(--spacing-s);
+    }
+    .discover-link {
+        justify-content: center;
+        margin-bottom: var(--spacing-m);
+    }
+
+
+    /* Footer reorganization */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .social-tags {
+        justify-content: center;
+        margin-top: var(--spacing-m);
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: var(--spacing-m);
+    }
+}
+
+@media (max-width: 500px) {
+    /* Extra small screens adjustments */
+    .hero-section {
+        height: 85vh; 
+    }
+    .hero-details .title {
+        font-size: var(--font-size-l);
+    }
+    .hero-details .subtitle {
+        font-size: var(--font-size-m);
+    }
+    .section-padding {
+        padding-top: var(--spacing-xl);
+        padding-bottom: var(--spacing-xl);
+    }
+}
+/* New rule for images within content sections (like About Us) */
+.content-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: var(--spacing-l) auto; /* Center the image and add vertical space */
+    border-radius: var(--border-radius-s);
+}
+
+/* Image styling for adventure cards (already in styles2.css) */
+.adventure__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+/* Video Styling for responsiveness */
+.meet-me video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--border-radius-s);
+}
+
+/* The Mystory section in about us */
+.mystory-mywhy img {
+    max-width: 300px; /*  maximum size */
+    width: 100%; /* Ensures responsiveness */
+    height: auto;
+    display: block;
+    margin: 0 auto var(--spacing-xl); /* Centers image above text, adds bottom spacing */
+    border-radius: var(--border-radius-s);
+}
+
+@media (min-width: 900px) {
+    /* On larger screens, push the image to the left in the non-centered layout */
+    .mystory-mywhy.container {
+        text-align: left;
+    }
+    .mystory-mywhy img {
+        margin: 0; /* Remove auto centering for desktop */
+        float: left; /* Float image to the left of the text */
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-m);
+    }
+}
+
+/* Styling for images and videos specifically on the mBot2 page and similar content */
+.about-mbot2-content img,
+.about-mbot2-content video,
+/* General styles for media elements in list items/sections */
+.section-padding img,
+.section-padding video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: var(--spacing-m); /* Adds space above media */
+    margin-bottom: var(--spacing-m); /* Adds space below media */
+    border-radius: var(--border-radius-s); /* Use the site's standard rounded corners */
+}
+
+/* video at the top takes up the full container width */
+.section-padding video:first-of-type {
+    margin-top: 0;
+}
+lesson-layout {
+    display: grid;
+    /* On desktop: 1 column for sidebar (fixed width) and 3 columns for main content */
+    grid-template-columns: 250px 1fr; 
+    gap: var(--spacing-xxl);
+    min-height: 70vh; /* Ensures the page has some height */
+}
+
+/* 2. Sidebar Styling */
+.lesson-sidebar {
+    position: sticky; /* Keep sidebar visible when scrolling main content */
+    top: calc(80px + var(--spacing-xl)); /* Stick below the header/nav */
+    align-self: start; /* Sticks to the start of its grid area */
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-s);
+    padding: var(--spacing-s);
+    background-color: var(--color-background-light);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.lesson-nav-item {
+    padding: var(--spacing-m);
+    font-size: var(--font-size-m);
+    color: var(--color-secondary-text);
+    cursor: pointer;
+    border-radius: var(--border-radius-s);
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: var(--font-weight-medium);
+}
+
+.lesson-nav-item:hover {
+    background-color: var(--color-background-subtle);
+    color: var(--color-primary-text);
+}
+
+.lesson-nav-item.current-step {
+    background-color: var(--color-accent-primary);
+    color: var(--color-background-light);
+    font-weight: var(--font-weight-bold);
+    box-shadow: 0 2px 5px rgba(243, 150, 28, 0.5); /* Shadow for primary accent */
+}
+
+/* 3. Main Content Area */
+.lesson-content {
+   
+    line-height: 1.7;
+}
+
+.lesson-section {
+    margin-bottom: var(--spacing-xxl);
+    padding-bottom: var(--spacing-l);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.lesson-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.lesson-subheading {
+    font-size: var(--font-size-l);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent-secondary);
+    margin-bottom: var(--spacing-m);
+}
+
+/* 4. Responsive Adjustments */
+@media (max-width: 900px) {
+    .lesson-layout {
+        /* On mobile/tablet, stack the layout vertically */
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .lesson-sidebar {
+        /* On mobile, un-stick it and make it fill the width */
+        position: static;
+        align-self: stretch;
+        /* Optionally make it a horizontal menu on small screens */
+        display: flex; 
+        flex-wrap: wrap;
+        padding: var(--spacing-s);
+        justify-content: center;
+    }
+    
+    .lesson-nav-item {
+        /* Adjust padding for a compact horizontal look */
+        padding: var(--spacing-s) var(--spacing-m);
+        margin: var(--spacing-xs);
+    }
+}
+.lesson-progress-container {
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.lesson-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-bar-steps {
+    display: flex;
+    align-items: flex-end; /* Align labels to the bottom line */
+    position: relative;
+    width: 80%;
+    margin-right: var(--spacing-l);
+    padding-bottom: var(--spacing-m);
+}
+
+.progress-bar-steps::before {
+    content: '';
+    position: absolute;
+    bottom: 27px; 
+    left: 70px;  /* Stops the line from hitting the far left edge */
+    right: 70px; /* Stops the line from hitting the far right edge */
+    
+    height: 3px;
+    background: var(--color-border);
+    z-index: 1;
+}
+
+.step {
+    flex-grow: 1; /* Distribute steps evenly */
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Base style for step icon */
+.step-icon {
+    width: 25px;
+    height: 25px;
+    background: var(--color-border);
+    color: var(--color-primary-text);
+    border-radius: var(--border-radius-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-bold);
+    margin: 0 auto;
+    border: 3px solid var(--color-background-light); /* White ring */
+    box-shadow: 0 0 0 1px var(--color-border);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Completed Step Styling */
+.step.completed .step-icon {
+    background: var(--color-accent-secondary); /* Blue for completed */
+    color: var(--color-background-light);
+    box-shadow: 0 0 0 1px var(--color-accent-secondary);
+}
+
+/* Current Step Styling */
+.step.current .step-icon {
+    background: var(--color-accent-primary); /* Orange for current */
+    color: var(--color-background-light);
+    box-shadow: 0 0 0 1px var(--color-accent-primary);
+}
+
+/* Step Label */
+.step-label {
+    display: block;
+    margin-bottom: var(--spacing-s);
+    font-size: var(--font-size-s);
+    color: var(--color-secondary-text);
+    white-space: nowrap;
+    position: relative;
+    bottom: 50px; /* Position label above the icon */
+}
+
+.button-help {
+    padding: var(--spacing-s) var(--spacing-m);
+    border-radius: var(--border-radius-s);
+    background-color: var(--color-primary-text);
+    color: var(--color-background-light);
+    font-weight: var(--font-weight-medium);
+    transition: opacity 0.3s;
+}
+
+.button-help:hover {
+    opacity: 0.8;
+}
+
+/* --- Lesson Content Layout --- */
+
+.lesson-content-layout {
+    display: flex;             
+    flex-direction: column;    
+    width: 100%;
+    max-width: 800px;          /*  for better readability */
+    margin: 0 auto;            /* Centering the column in the middle of the page */
+    gap: var(--spacing-l);     /* Space between Text, Video, and Quiz */
+}
+
+/* UPDATED: Added border and styling to the lesson text box */
+.lesson-text-column {
+    width: 100%;
+    /* 1. The Border: Matches your site's variable */
+    border: 2px solid var(--color-border); 
+    
+    /* 2. Rounded Corners: Consistent with buttons/cards */
+    border-radius: var(--border-radius-s);
+    
+    /* 3. Spacing: Pushes text away from the border walls */
+    padding: var(--spacing-l);
+    
+    /* 4. Background: Ensures it sits on top of any page background */
+    background-color: var(--color-background-light);
+    
+    /* Optional: A subtle shadow to make it pop like the video cards */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.lesson-subheading {
+    font-size: var(--font-size-l);
+    color: var(--color-accent-secondary);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-l);
+}
+
+/* Video Column Styling */
+.lesson-video-column {
+    position: static;          
+    width: 100%;               
+    order: 0;                  
+    margin-top: var(--spacing-m); 
+    margin-bottom: var(--spacing-l);
+    box-shadow: none; 
+    background-color: transparent; 
+    padding: 0;
+}
+
+.video-placeholder-box {
+    margin-top: var(--spacing-m);
+    background-color: var(--color-background-light);
+    padding: var(--spacing-m);
+    border-radius: var(--border-radius-s);
+    text-align: center;
+    border: 1px dashed var(--color-border);
+}
+
+/* --- Responsive Adaptations --- */
+
+@media (max-width: 900px) {
+    .lesson-content-layout {
+        /* Stack columns on top of each other on smaller screens */
+        grid-template-columns: 1fr;
+    }
+    
+    .lesson-video-column {
+        /* Un-stick the video panel on mobile so it scrolls normally */
+        position: static;
+        align-self: stretch;
+        order: -1; /* Place the video before the lesson text on mobile */
+    }
+
+    .lesson-progress-container {
+        padding-top: var(--spacing-m);
+        padding-bottom: var(--spacing-m);
+    }
+    
+    .progress-bar-steps {
+        width: 100%;
+        margin-right: var(--spacing-m);
+    }
+    
+    .step-label {
+        font-size: var(--font-size-xs);
+    }
+}
+/* --- Scroll Animation (Feature 2) --- */
+.hidden-on-scroll {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(20px); 
+    transition: all 1s;
+}
+
+.hidden-on-scroll.show {
+    opacity: 1;
+    transform: translateY(0);
+    filter:blur(0);
+
+}
+
+/* --- Mobile Menu Active State (Feature 1) --- */
+@media (max-width: 900px) {
+    
+   
+    /* This is the "HIDDEN" state for your menu */
+    .main-nav {
+        /* Layout */
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-l); /* Adds space between links */
+        padding: var(--spacing-xxl) var(--spacing-xl);
+        
+        /* Positioning (Sidebar) */
+        position: fixed; /* Fixed, so it covers the whole screen */
+        top: 0;
+        right: 0;
+        height: 100vh; /* Full viewport height */
+        width: 250px;  /* Sidebar width, like the video */
+        z-index: 999;  /* Sits above everything */
+        
+        /* * The "Faded Cover" (Backdrop Filter) 
+         * This creates the frosted glass effect.
+         */
+        background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent */
+        backdrop-filter: blur(10px); /* The BLUR effect */
+        box-shadow: -10px 0 15px rgba(0, 0, 0, 0.1);
+        
+        /* * The "Fade In" (Slide Animation) 
+         * By default, it's hidden 100% off-screen to the right.
+         */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(100%);
+        transition: all 0.4s ease-in-out;
+    }
+
+    /* This is the "VISIBLE" state */
+    .main-nav.main-nav-active {
+        /* * SHOW THE MENU:
+         * We move it back to its original spot (0) 
+         * and make it fully visible.
+         */
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+    .main-nav ul {
+        flex-direction: column; /* Stack the list items vertically */
+    }
+    
+    .main-nav.main-nav-active .nav-link {
+        font-size: var(--font-size-m);
+        
+        border-bottom: none; 
+        padding: var(--spacing-s) 0;
+    }
+    
+    
+}
+/* --- NEW: Landing Page Video Cards (Feature 3) --- */
+/* This styles the vertical video cards for the landing page */
+
+.adventure-snippets-list {
+    width: 100%;
+    max-width: 700px; /* Center the cards in a column */
+    margin: 0 auto; /* Center the container */
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-l);
+}
+
+.video-snippet-card {
+    height: 400px;
+    border-radius: var(--border-radius-s);
+    overflow: hidden;
+    position: relative; /* For positioning video and text */
+    
+    box-shadow: 0px 8px 15px -5px rgba(0,0,0,0.15); 
+    border: 2px solid var(--color-border);
+    background-color: var(--color-primary-text); /* Dark fallback */
+}
+
+.video-snippet-card .adventure-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the entire card area */
+    z-index: 1;
+}
+
+.video-snippet-card .video-content-overlay {
+    color: white; /* Text must be light on the video */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Position content at the bottom */
+    width: 100%;
+    height: 100%;
+    
+    /* Overlay for text contrast, sits on top of video */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 40%, transparent 70%);
+    position: relative;
+    z-index: 2; /* Place text column above the video */
+    padding: var(--spacing-l);
+}
+
+.video-content-overlay h4 {
+    text-transform: uppercase;
+    color: var(--color-background-light);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-m);
+    margin-bottom: var(--spacing-s);
+}
+
+.video-content-overlay p {
+    color: var(--color-background-light);
+    font-size: var(--font-size-s);
+    margin-bottom: var(--spacing-m);
+}
+/*  Edits to allow my sections to be full screen so as to effectively apply the appear on scroll function & also making the font size bigger for a fuller experience and for easier reading on larger screens  */
+.full-screen-section {
+    min-height: 85vh; /* 85vh leaving room for headers */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
+    align-items: center;   /* Horizontally center the content */
+    text-align: center;      /* Center-align the text */
+}
+.about-feature.full-screen-section {
+    display: flex; /* This overrides the 'grid' property */
+}
+/* Make the children stack and constrain their width */
+.about-feature.full-screen-section > * {
+    max-width: 750px;
+}
+/* On about-us.html, this overrides the floating image */
+.mystory-mywhy.full-screen-section img {
+    float: none; /* Disables the float: left */
+    margin: 0 auto var(--spacing-xl); /* Centers the image */
+}
+.full-screen-section h1,
+.full-screen-section h2 {
+    font-size: var(--font-size-xxl); /* Make titles even bigger */
+}
+
+.full-screen-section p {
+    font-size: var(--font-size-l); 
+    max-width: 750px; /* Constrains line length for readability */
+    line-height: 1.7; /* More breathing room */
+}
+
+/* for the effect I want I need to add the following css to make sure it fades into view smoothly*/
+
+.delay-1 { transition-delay: 0.2s; }
+.delay-2 { transition-delay: 0.4s; }
+.delay-3 { transition-delay: 0.6s; }
+
+/* * This ensures the base .hidden-on-scroll class 
+* uses a default delay if no helper is added.
+*/
+.hidden-on-scroll {
+    transition-delay: 0.2s;
+}
+/*In order to size my videos so they are full size and fill the page I need to add the following code to resize*/
+.video-hero-section {
+    min-height: 85vh; /* This sets the large height */
+    width: 100%;      /* This makes it full-width */
+    position: relative;
+    overflow: hidden;
+ 
+}
+
+.video-hero-section .adventure-video {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This makes it fill the space */
+    z-index: 1;
+}
+
+.video-hero-section .video-content-overlay {
+    /* This is the text overlay */
+    position: relative; 
+    z-index: 2; /* Sits on top of the video */
+    
+    /* This centers the text inside the div */
+    margin: auto; 
+    text-align: center;
+    
+    /* gradient from the other cards */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;*/
+    justify-content: flex-start;  /* Changed from 'center' */
+    padding-top: var(--spacing-xxl); /* Added for spacing */
+    align-items: center; 
+
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 40%, transparent 70%);
+}
+
+.video-hero-section .video-content-overlay h1 {
+    color: white; /* To Make sure text is visible */
+    font-size: var(--font-size-xxl);
+}
+/* =========================================
+   NAVIGATION ARROWS (Lesson Player)
+   ========================================= */
+
+/* 1. The Circle Button Container */
+.arrow-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Centers it vertically */
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-accent-primary); /* Orange */
+    border-radius: 50%; /* Makes it a circle */
+    
+    /* Centering the arrow icon inside */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 10; /* Ensures it sits on top of the text/video */
+    transition: background-color 0.3s, transform 0.2s;
+    border: none; /* Removes the default gray button border */
+}
+
+/* Hover Effect */
+.arrow-nav:hover {
+    background-color: var(--color-accent-secondary); /* Blue */
+    transform: translateY(-50%) scale(1.1); /* Slight zoom */
+}
+
+/* Positioning: Left vs Right */
+.left-nav {
+    left: -25px; /* Puts it half-hanging off the left edge */
+}
+
+.right-nav {
+    right: -25px; /* Puts it half-hanging off the right edge */
+}
+
+/* 2. The Arrow Shape (CSS Geometry) */
+.arrow {
+    border: solid white;
+    border-width: 0 3px 3px 0; /* Creates the 'V' shape */
+    display: inline-block;
+    padding: 3px;
+    width: 10px;
+    height: 10px;
+}
+
+/* Rotate the 'V' to point Right */
+.arrow.right {
+    transform: rotate(-45deg);
+    margin-right: 2px; /* Optical centering adjustment */
+}
+
+/* Rotate the 'V' to point Left */
+.arrow.left {
+    transform: rotate(135deg);
+    margin-left: 2px; /* Optical centering adjustment */
+}
+
+/* 3. Mobile Responsiveness */
+@media (max-width: 900px) {
+    /* On mobile, move them inside the box so they don't get cut off */
+    .left-nav { left: 10px; }
+    .right-nav { right: 10px; }
+}
