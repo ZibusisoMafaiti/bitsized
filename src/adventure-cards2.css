@@ -1,98 +1,124 @@
-
-
+/* =========================================
+   1. CONTAINER & LAYOUT
+   ========================================= */
 .wrapper {
-    /* Only contain the card section, not the whole viewport */
     width: 100%;
-    min-height: 500px; /* Ensure space for the cards to expand */
+    height: 450px; 
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-xxl) 0;
+    padding: 0;
 }
+
 .adventure-list-container {
     width: 100%;
-    max-width: 700px; /* Increased max width for a modern look */
+    max-width: 1200px; 
+    height: 100%;      
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row; 
+    align-items: stretch; 
+    gap: 15px;         
+    padding: 0 20px; 
 }
+
+/* =========================================
+   2. THE CARD
+   ========================================= */
 .card {
-    height: 100px; /* Slightly taller initial height */
-    border-radius: var(--border-radius-s); /* Use site's border radius */
+    /* DEFAULT STATE (Collapsed) */
+    flex: 1;               
+    height: 100%;          
     background-size: cover;
     background-position: center;
     cursor: pointer;
-    overflow: hidden;
-    margin: var(--spacing-s) 0; /* Use site's spacing */
+    overflow: hidden;      
+    border-radius: 30px;   
+    margin: 0;             
     display: flex;
-    align-items: flex-start;
-    transition: .6s cubic-bezier(.28, -0.03, 0, .99);
-    /* Themed shadow, lighter */
-    box-shadow: 0px 8px 15px -5px rgba(0,0,0,0.15); 
-    border: 2px solid var(--color-border); /* Subtle border */
-    background-color: var(--color-background-light); /* Ensure background is white/light */
-}
-/* Styling the "Adventure Card" backgrounds using placeholders that hint at your theme */
-.card[for="c1"] {
-    background-image: url('/images/Gemini_Generated_Image_eyyud8eyyud8eyyu.png');
-}
-.card[for="c2"] {
-    background-image: url('https://placehold.co/700x300/1ca6f3/fff?text=Lesson+2');
-}
-.card[for="c3"] {
-    background-image: url('https://placehold.co/700x300/f3961c/fff?text=Lesson+3');
-}
-.card[for="c4"] {
-    background-image: url('https://placehold.co/700x300/1ca6f3/fff?text=Lesson+4');
-}
-.card[for="c5"] {
-    background-image: url('https://placehold.co/700x300/f3961c/fff?text=Lesson+5');
+    align-items: flex-end; /* Pushes glass to bottom */
+    transition: flex 0.6s cubic-bezier(.28, -0.03, 0, .99);
+    
+    /* SHADOW */
+    box-shadow: 0px 15px 35px rgba(0,0,0,0.4); 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    position: relative;
 }
 
+/* Background Images */
+.card[for="c1"] { background-image: url('/images/Gemini_Generated_Image_eyyud8eyyud8eyyu.png'); }
+.card[for="c2"] { background-image: url('https://placehold.co/700x300/1ca6f3/fff?text=Lesson+2'); }
+.card[for="c3"] { background-image: url('https://placehold.co/700x300/f3961c/fff?text=Lesson+3'); }
+.card[for="c4"] { background-image: url('https://placehold.co/700x300/1ca6f3/fff?text=Lesson+4'); }
+.card[for="c5"] { background-image: url('https://placehold.co/700x300/f3961c/fff?text=Lesson+5'); }
+
+/* =========================================
+   3. GLASS CONTENT COLUMN (THE FIX IS HERE)
+   ========================================= */
 .card > .column {
-    color: var(--color-primary-text); /* Use dark text color */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.95); /* High opacity white so numbers pop */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
     width: 100%;
-    /* Subtle overlay for better text contrast */
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0.7) 60%, transparent); 
-    height: 100%;
+    height: auto; 
+    min-height: 100px; /* Ensure tall enough for the number */
+    padding: 20px;
+    
+    /* --- IMPORTANT: Force Opacity to 1 --- */
+    opacity: 1; 
+    transform: translateY(0);
+    
+    /* Layout: Row (Number Left, Text Right) */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+
+    transition: all 0.3s ease;
 }
+
+/* =========================================
+   4. THE NUMBER (Icon)
+   ========================================= */
 .card > .column > .icon {
-    /* Remove dark background and use site colors */
-    background: none; 
-    color: var(--color-background-light); 
-    border-radius: var(--border-radius-circle); 
-    width: 50px;
+    /* Position relative to flex flow */
+    position: relative; 
+    
+    width: 50px; 
     height: 50px;
+    
+    /* Center the number */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: var(--spacing-m);
-    font-size: var(--font-size-l);
-    color: var(--color-background-light);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow for pop effect */
-    transition: all .3s ease;
+    
+    /* Font Styling */
+    font-size: 2.5rem; 
+    font-weight: 800; 
+    font-family: sans-serif;
+    
+    /* Ensure it doesn't shrink when card is small */
+    flex-shrink: 0;
+    z-index: 10;
 }
-.card > .column > .description {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    overflow: hidden;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(30px);
-    transition-delay: .3s;
-    transition: all .6s ease;
-    padding: 0 var(--spacing-m) var(--spacing-l);
+
+/* =========================================
+   5. TEXT DESCRIPTION (Hides/Shows)
+   ========================================= */
+.description {
+    margin-top: 5px; 
     color: var(--color-primary-text);
+    
+    /* --- LOGIC CHANGE: Hide only the TEXT, not the whole glass box --- */
+    opacity: 0;
+    width: 0;        /* Squeeze width to 0 when closed */
+    overflow: hidden;
+    white-space: nowrap; 
+    
+    transition: all 0.4s ease;
 }
-.description p {
-    color: var(--color-secondary-text); /* Lighter text for description */
-    padding-top: var(--spacing-xs);
-    font-size: var(--font-size-s);
-}
+
 .description h4 {
     text-transform: uppercase;
     color: var(--color-primary-text);
@@ -100,44 +126,51 @@
     font-size: var(--font-size-m);
     margin-bottom: var(--spacing-s);
 }
-.start-btn {
-    margin-top: var(--spacing-m);
+
+.description p {
+    color: var(--color-secondary-text);
+    padding-top: var(--spacing-xs);
     font-size: var(--font-size-s);
+    line-height: 1.5;
 }
 
-input {
-    display: none;
+.start-btn {
+    margin-top: 10px;
+    align-self: flex-start;
 }
 
-/* State when checked (expanded) */
+/* =========================================
+   6. INTERACTION
+   ========================================= */
+input { display: none; }
+
+/* EXPAND CARD WIDTH */
 input:checked + label {
-    height: 350px; /* Increased expansion height */
-    border-color: var(--color-accent-primary);
+    flex: 6; 
 }
+
+/* REVEAL TEXT */
 input:checked + label .description {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+    opacity: 1;
+    width: 100%; /* Text grows to fill space */
+    white-space: normal; 
 }
 
-/* Animation on hover  */
+/* Hover Effect */
 .card:hover {
-    transform: scale(1.01);
+    filter: brightness(1.05);
 }
 
-/* Media Query for Mobile Responsiveness */
-@media (max-width: 600px) {
-    .card {
-        height: 80px;
-    }
-    input:checked + label {
-        height: 250px;
-    }
-    .card > .column > .icon {
-        margin: var(--spacing-s);
-        width: 40px;
-        height: 40px;
-    }
-    .description h4 {
-        font-size: var(--font-size-n);
-    }
+/* MOBILE */
+@media (max-width: 768px) {
+    .wrapper { height: auto; margin-top: -50px; } 
+    .adventure-list-container { flex-direction: column; height: 600px; }
+    .card { width: 100%; flex: 1; }
+    input:checked + label { flex: 5; }
+    
+    .card > .column { min-width: unset; }
+    
+    /* Stack number and text vertically on mobile */
+    .card > .column { flex-direction: column; }
+    input:checked + label .description { height: auto; width: 100%; }
 }

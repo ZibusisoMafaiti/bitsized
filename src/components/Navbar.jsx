@@ -46,6 +46,7 @@ export default function Navbar() {
             <li>
                 <Link to="/adventures" className={isActive('/adventures')} onClick={closeMenu}>Adventures</Link>
             </li>
+            <li><Link to="/applications" className="nav-link">Applications</Link></li>
             <li>
                 <Link to="/contact" className={isActive('/contact')} onClick={closeMenu}>Contact</Link>
             </li>

@@ -88,24 +88,12 @@ export default function Home() {
       <section className="adventure-snippets section-gray section-padding">
         <div className="container hidden-on-scroll delay-3">
           
-          <h2 style={{ textAlign: 'center' }}>Real World Robotics</h2>
-          <p className="section-lead" style={{ textAlign: 'center', marginBottom: '60px' }}>
-             Before you create your own, take some time to marvel at the opportunity. 
-             See what real robots are doing on Mars right now!
-          </p>
-
+          
           <div className="adventure-snippets-list">
             
-            {/* CARD 1: LIVE MARS ROVER FEED (API)
-               I used 'full-screen-section' here to ensure it takes up the full viewport height.
-               I added 'display: flex' to ensure the card centers perfectly within that full height.
-            */}
-            <div className="full-screen-section hidden-on-scroll delay-1" 
-                 style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-               <MarsRover />
-            </div>
+           
 
-            {/* CARD 2: ADVENTURES PROMO (VIDEO)
+            {/* CARD 1: ADVENTURES PROMO (VIDEO)
                This remains unchanged, showing the 'Kids Learning' video.
             */}
             <div className="video-snippet-card adventure-card-vertical full-screen-section hidden-on-scroll delay-2">

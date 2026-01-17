@@ -14,14 +14,12 @@ export default function MarsRover() {
     async function fetchMarsPhoto() {
       try {
         // --- CONFIGURATION ---
-        // I switched to the NASA Image and Video Library API.
-        // Good news: This API does NOT require an API Key!
-        // I am searching specifically for "Mars Rover" images.
+       
         const QUERY = 'Mars Rover';
         const MEDIA_TYPE = 'image'; // I only want photos, not videos/audio
 
         // --- ASYNC FETCH REQUEST ---
-        // I hit the 'search' endpoint. Notice there is no 'api_key' parameter needed anymore.
+       
         const response = await fetch(
           `https://images-api.nasa.gov/search?q=${QUERY}&media_type=${MEDIA_TYPE}`
         );
@@ -33,8 +31,7 @@ export default function MarsRover() {
         // --- DATA PARSING ---
         const json = await response.json();
 
-        // The structure here is different from the previous API.
-        // It returns a 'collection', which contains 'items'.
+        
         const items = json.collection.items;
 
         if (items && items.length > 0) {

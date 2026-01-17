@@ -11,6 +11,7 @@ import AboutUs from './pages/AboutUs';
 import Bots from './pages/Bots';
 import Adventures from './pages/Adventures';
 import LessonPlayer from './pages/LessonPlayer';
+import Applications from "./pages/Applications";
 
 /**
  * App Component
@@ -58,6 +59,7 @@ function App() {
         */}
         <Route path="/adventures/:courseId/:lessonId/:slideId" element={<LessonPlayer />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/applications" element={<Applications />} />
         
 
       </Routes>
