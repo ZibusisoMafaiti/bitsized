@@ -9,8 +9,119 @@ const wildRobotCourse = {
                     type: "lesson",
                     title: "Welcome to the Wild",
                     bodyText: "Watch this clip from 'The Wild Robot'. ROZZUM unit 7134 (Roz) wakes up on a remote island. Designed to assist humans, she struggles to interact with the local wildlife, who view her as a monster. She tries to offer 'conflict resolution' and 'assistance,' but quickly learns that her standard programming might not work here.",
-                    mediaSource: "https://www.youtube.com/embed/eGI0vy_sMvw?si=eUUpMWKVepaBtn8a", 
+                    mediaSource: "https://drive.google.com/file/d/1DuyZXH8BKFgq3bPsBvg9F2Zj7jhnQ0IV/preview", 
                 },
+                {
+    type: "quiz",
+    title: "Concept Check: The Survival Paradox",
+    bodyText: "Reflecting on Fink's observation of the group dynamics.",
+    mediaSource: "", 
+    quizDetails: {
+        question: "Fink points out that 'if we can't keep it together in here, everyone's dead'. What happens to a society that relies strictly on individual 'survival instincts' rather than a shared system of care?",
+        options: [
+            "It remains in a state of constant conflict, preventing any long-term growth or safety for the group.",
+            "It becomes more efficient because only the strongest individuals survive.",
+            "It thrives because everyone is focused on their own specialized roles.",
+            "It successfully completes its primary task by returning to a basic natural state."
+        ],
+        correctAnswerIndex: 0
+    }
+},
+{
+    type: "quiz",
+    title: "Concept Check: The Language of Peace",
+    bodyText: "How communication builds foundations for cooperation.",
+    mediaSource: "",
+    quizDetails: {
+        question: "How does Roz’s effort to learn the island's 'dialects' serve as a foundation for the 'Great Truce' between the animals?",
+        options: [
+            "It was purely for her own data collection and had no impact on the animals.",
+            "It allowed her to download a new language pack to better control the island.",
+            "It created the communication needed to negotiate peace between groups that naturally fear or hunt each other.",
+            "It was a waste of time because the animals continued to hate each other."
+        ],
+        correctAnswerIndex: 2
+    }
+},
+{
+    type: "quiz",
+    title: "Concept Check: Vulnerability and Trust",
+    bodyText: "Analyzing the turning point for the island inhabitants.",
+    mediaSource: "",
+    quizDetails: {
+        question: "Why was it a 'turning point' for the animals to see Roz’s physical vulnerability and damage before they agreed to the truce?",
+        options: [
+            "It proved Roz was malfunctioning and was no longer a threat to the predators.",
+            "It allowed the predators to realize they could take over the shelter more easily.",
+            "It showed that the 'Universal Dynamics' units are poorly built for the wilderness.",
+            "It provided a shared moment of empathy that outweighed their 'programmed' instincts to hunt or hide."
+        ],
+        correctAnswerIndex: 3
+    }
+},
+{
+    type: "quiz",
+    title: "Concept Check: Redefining Leadership",
+    bodyText: "How Roz changes our understanding of success.",
+    mediaSource: "",
+    quizDetails: {
+        question: "In the context of Roz saving the animals, how does our definition of a 'successful leader' change?",
+        options: [
+            "A leader is successful only if they complete their assigned tasks with 100% efficiency.",
+            "A leader is successful when they build a system where the 'weakest' and the 'strongest' can coexist safely.",
+            "A leader is successful if they can force everyone to follow the same rigid rules.",
+            "Success is measured by how quickly a leader can return to their original home base."
+        ],
+        correctAnswerIndex: 1
+    }
+},
+{
+    type: "quiz",
+    title: "Concept Check: Choice vs. Programming",
+    bodyText: "The difference between rigid rules and active empathy.",
+    mediaSource: "",
+    quizDetails: {
+        question: "Fink argues that 'to survive we must become more than we were programmed to be'. Why is empathy described here as a 'choice' rather than a 'program'?",
+        options: [
+            "It is easier to follow a pre-set program than it is to think for yourself.",
+            "Empathy is the active choice to build connections where none existed, providing a flexibility that rigid rules cannot.",
+            "Programs are always right, and Roz was wrong to delay her factory return.",
+            "Rules are enough for survival; empathy is just an optional and unnecessary addition."
+        ],
+        correctAnswerIndex: 1
+    }
+},{
+    type: "quiz",
+    title: "Analysis: The Language of Empathy",
+    bodyText: "Roz notes the animals' 'dialect is not in my data banks,' yet she learns to lead them.",
+    mediaSource: "", 
+    quizDetails: {
+        question: "What does Roz's progression from a 'data gap' to effective communication suggest about empathy in problem-solving?",
+        options: [
+            "Conflict resolution is only possible once one party dominates the other.",
+            "Solving social problems requires an active effort to learn and understand unique perspectives rather than just using pre-set data.",
+            "Empathy is less important than physical mimicry in resolving disputes.",
+            "Language barriers can only be solved by a factory software update."
+        ],
+        correctAnswerIndex: 1
+    }
+},
+{
+    type: "quiz",
+    title: "Analysis: Choice and Belonging",
+    bodyText: "Roz responds to the claim she doesn't belong by saying, 'I am already home.'",
+    mediaSource: "",
+    quizDetails: {
+        question: "How does Roz's choice to stay reflect a shift from mechanical survival to empathetic belonging?",
+        options: [
+            "She is simply following the last human command received before the crash.",
+            "She calculated that the island has more repair resources than the factory.",
+            "Her identity is now defined by the empathetic bonds and caregiving tasks she has chosen, rather than her makers' original intent.",
+            "She is experiencing a mechanical 'glitch' that prevents her from recognizing her true home."
+        ],
+        correctAnswerIndex: 2
+    }
+},
                 {
                     type: "quiz",
                     title: "Concept Check: Biological vs. Mechanical",
@@ -107,19 +218,19 @@ const wildRobotCourse = {
                     type: "lesson",
                     title: "mBot2 Sensors: Eyes & Ears",
                     bodyText: "SENSING: The mBot2 has an Ultrasonic Sensor to measure distance (preventing crashes) and a Quad RGB Sensor to detect colors and lines. These are like its eyes and ears.",
-                    mediaSource: "/images/sensors_image.jpg" // Updated path to standard public folder
+                    mediaSource: "/assets/images/ultrasonic_sensor.png" // Updated path to standard public folder
                 },
                 {
                     type: "lesson",
                     title: "mBot2 CyberPi: The Brain",
                     bodyText: "PLANNING: The CyberPi is the main computer board. It processes the data gathered by the sensors and runs your code to decide what the robot should do next.",
-                    mediaSource: "/images/cyberpi_image.jpg" // Updated path to standard public folder
+                    mediaSource: "/assets/images/mbot1_brain.png" // Updated path to standard public folder
                 },
                 {
                     type: "lesson",
                     title: "mBot2 Actuators: Muscles & Voice",
                     bodyText: "ACTING: Once a plan is made, the mBot2 uses Encoder Motors to drive precisely and a Speaker and Screen on the CyberPi to communicate with you. It doesn't just drive blindly; it thinks about where it's going!",
-                    mediaSource: "/images/actuators_image.jpg" // Updated path to standard public folder
+                    mediaSource: "/assets/images/mbot-response.png" // Updated path to standard public folder
                 }
             ]
         },

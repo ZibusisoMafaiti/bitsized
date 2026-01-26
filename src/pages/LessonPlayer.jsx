@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Stepper from '../components/Stepper';
 import Quiz from '../components/Quiz';
@@ -19,7 +19,7 @@ export default function LessonPlayer() {
   // We define these variables FIRST so they are available for all logic below.
   const { courseId, lessonId, slideId } = useParams();
   const navigate = useNavigate();
-  
+  const [showSuccess, setShowSuccess] = useState(false);
   // Convert the URL string "0" into a number 0. Default to 0 if missing.
   const currentIndex = parseInt(slideId) || 0;
 
@@ -66,6 +66,24 @@ export default function LessonPlayer() {
   const goToNext = () => {
     if (currentIndex < lessons.length - 1) {
       navigate(`/adventures/${courseId}/${lessonId}/${currentIndex + 1}`);
+    } else
+       {
+      // User is on the last slide
+     
+      setShowSuccess(true);
+    } 
+  };
+const startNextLesson = () => {
+    // Logic to find the next lesson ID (e.g., lesson-1 -> lesson-2)
+    const lessonNumber = parseInt(lessonId.split('-')[1]);
+    const nextLessonId = `lesson-${lessonNumber + 1}`;
+    
+    if (courseData.lessons[nextLessonId]) {
+        setShowSuccess(false);
+        navigate(`/adventures/${courseId}/${nextLessonId}/0`);
+    } else {
+        // No more lessons, go back to adventure selection
+        navigate('/adventures');
     }
   };
 
@@ -74,7 +92,15 @@ export default function LessonPlayer() {
       navigate(`/adventures/${courseId}/${lessonId}/${currentIndex - 1}`);
     }
   };
-
+const handleStepNavigation = (index) => {
+  // Use your existing navigate logic to update the URL
+ if (index <= currentIndex) {
+    navigate(`/adventures/${courseId}/${lessonId}/${index}`);
+  } else {
+    // Optional: Add a subtle notification or shake effect
+    console.log("Slide locked. Please complete the current step first.");
+  }
+};
   // -------------------------------------------------------
   // 5. ERROR HANDLING / EARLY RETURNS
   // -------------------------------------------------------
@@ -97,11 +123,39 @@ export default function LessonPlayer() {
   // 6. RENDER
   // -------------------------------------------------------
   return (
-    <main>
+    <main style={{ position: 'relative' }}>
+        {showSuccess && (
+            <div className="success-overlay">
+                <div className="success-card">
+                    <h2>Mission Accomplished! 🏆</h2>
+                    <p>You've mastered {currentLessonGroup.title}.</p>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                        <button className="button button-primary" onClick={startNextLesson}>
+                            Next Lesson
+                        </button>
+                       <button 
+  className="button button-secondary" 
+  style={{ 
+    color: 'var(--color-accent-secondary)', // Forced blue text
+    borderColor: 'var(--color-accent-secondary)', // Forced blue border
+    backgroundColor: 'transparent' 
+  }}
+  onClick={() => navigate('/adventures')}
+>
+  Back to Map
+</button>
+                    </div>
+                </div>
+            </div>
+        )}
         {/* Progress Tracker */}
         <div className="lesson-progress-container container">
             <section className="lesson-progress">
-                <Stepper lessons={lessons} currentIndex={currentIndex} />
+               <Stepper 
+  lessons={lessons} 
+  currentIndex={currentIndex} 
+  onStepClick={handleStepNavigation} 
+/>
                 <button className="button-help" type="button">Help</button>
             </section>
         </div>
@@ -120,13 +174,14 @@ export default function LessonPlayer() {
             </button>
 
             <button 
-                className="arrow-nav right-nav" 
-                onClick={goToNext}
-                style={{ visibility: currentIndex === lessons.length - 1 ? 'hidden' : 'visible' }}
-                aria-label="Next Slide"
-            >
-                <span className="arrow right"></span>
-            </button>
+    className="arrow-nav right-nav" 
+    onClick={goToNext}
+    /* FIX: Remove the hidden visibility so it can be clicked on the last slide */
+    style={{ visibility: 'visible' }} 
+    aria-label="Next Slide"
+>
+    <span className="arrow right"></span>
+</button>
             
             <article className="lesson-text-column">
                 <h2 className="lesson-title">{currentSlide.title}</h2>
@@ -141,23 +196,35 @@ export default function LessonPlayer() {
                             
                             {/* Media Logic */}
                             {currentSlide.mediaSource && (
-                                <div className="video-container" style={{ marginTop: '20px' }}>
-                                    {currentSlide.mediaSource.includes('youtube') ? (
-                                        <iframe 
-                                            src={currentSlide.mediaSource} 
-                                            title="Lesson Video"
-                                            style={{ width: '100%', height: '400px', border: 'none', borderRadius: '8px' }}
-                                            allowFullScreen
-                                        />
-                                    ) : (
-                                        <video 
-                                            src={currentSlide.mediaSource} 
-                                            controls 
-                                            style={{ width: '100%', borderRadius: '8px' }} 
-                                        />
-                                    )}
-                                </div>
-                            )}
+    <div className="video-container" style={{ marginTop: '20px' }}>
+    {/* Step 1: Check for Iframes (YouTube/Drive) */}
+    {currentSlide.mediaSource.includes('youtube') || currentSlide.mediaSource.includes('drive.google.com') ? (
+        <iframe 
+            src={currentSlide.mediaSource} 
+            title="Lesson Video"
+            style={{ width: '100%', height: '400px', border: 'none', borderRadius: '8px' }}
+            allow="autoplay"
+            allowFullScreen
+        />
+    ) : 
+    /* Step 2: Nested condition - Check if it's a Video file */
+    currentSlide.mediaSource.endsWith('.mp4') || currentSlide.mediaSource.endsWith('.webm') ? (
+        <video 
+            key={currentSlide.mediaSource}
+            src={currentSlide.mediaSource} 
+            controls 
+            style={{ width: '100%', borderRadius: '8px' }} 
+        />
+    ) : (
+        /* Step 3: Fallback - Render as an Image */
+        <img 
+            src={currentSlide.mediaSource} 
+            alt={currentSlide.title} 
+            style={{ width: '100%', borderRadius: '8px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }} 
+        />
+    )}
+</div>
+)}
                         </>
                     )}
                 </div>

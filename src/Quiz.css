@@ -1,0 +1,55 @@
+/* Quiz.css */
+.quiz-container {
+    margin-top: var(--spacing-l);
+    width: 100%;
+}
+
+.quiz-question {
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-m);
+    color: var(--color-primary-text);
+}
+
+.quiz-option-button {
+    display: block;
+    width: 100%;
+    margin-bottom: var(--spacing-m);
+    padding: var(--spacing-s) var(--spacing-l);
+    border-radius: var(--border-radius-m);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    cursor: pointer;
+    
+    /* Default State: Visible Glass Look */
+    background-color: rgba(255, 255, 255, 0.8); 
+    color: var(--color-primary-text);
+    border: 2px solid var(--color-accent-primary);
+    
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for active options */
+.quiz-option-button:hover:not(:disabled) {
+    background-color: var(--color-accent-secondary);
+    border-color: var(--color-accent-secondary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Result States */
+.quiz-option-button.correct {
+    background-color: #28a745 !important; /* Green */
+    border-color: #28a745 !important;
+    color: white !important;
+}
+
+.quiz-option-button.wrong {
+    background-color: var(--color-accent-danger) !important; /* Red */
+    border-color: var(--color-accent-danger) !important;
+    color: white !important;
+}
+
+.quiz-option-button:disabled {
+    cursor: default;
+    opacity: 0.8;
+}

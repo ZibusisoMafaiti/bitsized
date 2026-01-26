@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import '../Quiz.css'; // Import the new styles
 
 export default function Quiz({ data }) {
   const [feedback, setFeedback] = useState(null); // 'correct' or 'wrong'
   const [selectedIndex, setSelectedIndex] = useState(null);
-
+useEffect(() => {
+    setFeedback(null);
+    setSelectedIndex(null);
+  }, [data]); // Runs every time a new slide/question is loaded
+  
   const handleAnswer = (index) => {
     setSelectedIndex(index);
     if (index === data.correctAnswerIndex) {
@@ -19,20 +24,18 @@ export default function Quiz({ data }) {
       
       <div className="quiz-options">
         {data.options.map((option, index) => {
-          // Determine button color based on state
-          let btnStyle = {};
+          // Determine the class based on the current state
+          let statusClass = '';
           if (selectedIndex === index) {
-            if (feedback === 'correct') btnStyle = { backgroundColor: 'green', color: 'white', borderColor: 'green' };
-            if (feedback === 'wrong') btnStyle = { backgroundColor: 'red', color: 'white', borderColor: 'red' };
+            statusClass = feedback === 'correct' ? 'correct' : 'wrong';
           }
 
           return (
             <button
               key={index}
-              className="button button-secondary"
-              style={{ display: 'block', marginBottom: '10px', width: '100%', ...btnStyle }}
+              className={`quiz-option-button ${statusClass}`}
               onClick={() => handleAnswer(index)}
-              disabled={feedback === 'correct'} // Disable clicks after getting it right
+              disabled={feedback === 'correct'} 
             >
               {option}
               {selectedIndex === index && feedback === 'correct' && " (Correct!)"}
