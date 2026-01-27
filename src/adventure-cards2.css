@@ -25,7 +25,6 @@
    2. THE CARD
    ========================================= */
 .card {
-    /* DEFAULT STATE (Collapsed) */
     flex: 1;               
     height: 100%;          
     background-size: cover;
@@ -35,87 +34,55 @@
     border-radius: 30px;   
     margin: 0;             
     display: flex;
-    align-items: flex-end; /* Pushes glass to bottom */
+    align-items: flex-end; 
     transition: flex 0.6s cubic-bezier(.28, -0.03, 0, .99);
-    
-    /* SHADOW */
     box-shadow: 0px 15px 35px rgba(0,0,0,0.4); 
     border: 1px solid rgba(255, 255, 255, 0.3); 
-    position: relative;
 }
 
-/* Background Images */
-.card[for="c1"] { background-image: url('/images/Gemini_Generated_Image_eyyud8eyyud8eyyu.png'); }
-.card[for="c2"] { background-image: url('https://placehold.co/700x300/1ca6f3/fff?text=Lesson+2'); }
-.card[for="c3"] { background-image: url('https://placehold.co/700x300/f3961c/fff?text=Lesson+3'); }
-.card[for="c4"] { background-image: url('https://placehold.co/700x300/1ca6f3/fff?text=Lesson+4'); }
-.card[for="c5"] { background-image: url('https://placehold.co/700x300/f3961c/fff?text=Lesson+5'); }
-
 /* =========================================
-   3. GLASS CONTENT COLUMN (THE FIX IS HERE)
+   3. GLASS COLUMN (THE INNER CONTENT)
    ========================================= */
 .card > .column {
-    /* Glass Effect */
-    background: rgba(255, 255, 255, 0.95); /* High opacity white so numbers pop */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-    width: 100%;
-    height: auto; 
-    min-height: 100px; /* Ensure tall enough for the number */
-    padding: 20px;
-    
-    /* --- IMPORTANT: Force Opacity to 1 --- */
-    opacity: 1; 
-    transform: translateY(0);
-    
-    /* Layout: Row (Number Left, Text Right) */
+    color: white;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 20px;
-
-    transition: all 0.3s ease;
-}
-
-/* =========================================
-   4. THE NUMBER (Icon)
-   ========================================= */
-.card > .column > .icon {
-    /* Position relative to flex flow */
-    position: relative; 
-    
-    width: 50px; 
-    height: 50px;
-    
-    /* Center the number */
-    display: flex;
-    justify-content: center;
+    flex-wrap: nowrap;
     align-items: center;
-    
-    /* Font Styling */
-    font-size: 2.5rem; 
-    font-weight: 800; 
-    font-family: sans-serif;
-    
-    /* Ensure it doesn't shrink when card is small */
-    flex-shrink: 0;
-    z-index: 10;
+    width: 100%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* =========================================
-   5. TEXT DESCRIPTION (Hides/Shows)
+   4. NUMBER/ICON CIRCLE
+   ========================================= */
+.card .number {
+    background-color: var(--color-primary-text);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0; 
+}
+
+/* =========================================
+   5. DESCRIPTION TEXT
    ========================================= */
 .description {
-    margin-top: 5px; 
-    color: var(--color-primary-text);
-    
-    /* --- LOGIC CHANGE: Hide only the TEXT, not the whole glass box --- */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     opacity: 0;
-    width: 0;        /* Squeeze width to 0 when closed */
+    width: 0;        
     overflow: hidden;
     white-space: nowrap; 
-    
     transition: all 0.4s ease;
 }
 
@@ -144,33 +111,96 @@
    ========================================= */
 input { display: none; }
 
-/* EXPAND CARD WIDTH */
 input:checked + label {
     flex: 6; 
 }
 
-/* REVEAL TEXT */
 input:checked + label .description {
     opacity: 1;
-    width: 100%; /* Text grows to fill space */
+    width: 100%; 
     white-space: normal; 
 }
 
-/* Hover Effect */
 .card:hover {
     filter: brightness(1.05);
 }
 
-/* MOBILE */
+
+/* =========================================
+   7. MOBILE "TABLET" LAYOUT
+   ========================================= */
 @media (max-width: 768px) {
-    .wrapper { height: auto; margin-top: -50px; } 
-    .adventure-list-container { flex-direction: column; height: 600px; }
-    .card { width: 100%; flex: 1; }
-    input:checked + label { flex: 5; }
+    .wrapper { 
+        height: auto; 
+        padding: 20px 0;
+    } 
     
-    .card > .column { min-width: unset; }
-    
-    /* Stack number and text vertically on mobile */
-    .card > .column { flex-direction: column; }
-    input:checked + label .description { height: auto; width: 100%; }
+    .adventure-list-container { 
+        flex-direction: column; /* Stack vertically */
+        height: auto;
+        padding: 0 15px;
+        gap: 12px; /* Tight gap for a "list" feel */
+    }
+
+    .card { 
+        width: 100%; 
+        flex: none;      
+        height: auto; /* Let the content decide the height */
+        min-height: 80px; 
+        border-radius: 15px; /* "Tablet" rounded corners */
+        background-image: none !important; /* Remove bg images to keep tablets clean */
+        background-color: var(--color-background-light);
+        border: 2px solid var(--color-border);
+        align-items: center; /* Center content vertically */
+    }
+
+    /* Change the glass column into a clean button surface */
+    .card > .column {
+        background: white;
+        backdrop-filter: none;
+        padding: 15px;
+        border-top: none;
+        justify-content: space-between;
+    }
+
+    .card .number {
+        width: 35px;
+        height: 35px;
+        font-size: var(--font-size-s);
+        margin-right: 15px;
+        background-color: var(--color-accent-secondary); /* Give numbers a pop of color */
+    }
+
+    /* Expand logic for the tablet */
+    input:checked + label {
+        flex: none; /* Don't grow width on mobile */
+        border-color: var(--color-accent-secondary);
+        background-color: #f0f9ff; /* Subtle blue highlight when "active" */
+    }
+
+    .description {
+        opacity: 0;
+        height: 0;
+        width: 100%;
+        white-space: normal;
+        transition: all 0.3s ease;
+    }
+
+    input:checked + label .description {
+        opacity: 1;
+        height: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .description h4 {
+        font-size: var(--font-size-n);
+        margin-bottom: 5px;
+    }
+
+    .start-btn {
+        width: 100%; /* Make button big and easy to tap */
+        text-align: center;
+        margin-top: 15px;
+    }
 }

@@ -1,8 +1,10 @@
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 :root{
     --color-primary-text: #252525; /* Dark color for main body text */
     --color-secondary-text: #333;   /* Slightly lighter for other parts of the website*/
@@ -126,6 +128,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 .header-content {
@@ -133,6 +138,8 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-m) 0;
+    width: 100%;
+    padding: 0 var(--spacing-m);
 }
 
 .logo {
@@ -625,9 +632,12 @@ lesson-layout {
     }
 }
 .lesson-progress-container {
-    padding-top: var(--spacing-xl);
-    padding-bottom: var(--spacing-xl);
-    border-bottom: 1px solid var(--color-border);
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: auto; /* Allow horizontal swiping */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* Smooth swiping for iPhone */
+    padding: 10px 0;
 }
 
 .lesson-progress {
@@ -636,32 +646,21 @@ lesson-layout {
     align-items: center;
 }
 
+.progress-bar-steps-wrapper {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: auto; /* Allows swiping left/right on dots */
+    overflow-y: hidden;
+    padding: 20px 10px;
+    -webkit-overflow-scrolling: touch; /* Smooth swiping on iOS */
+}
+
 .progress-bar-steps {
-    display: flex;
-    align-items: flex-end; /* Align labels to the bottom line */
-    position: relative;
-    width: 80%;
-    margin-right: var(--spacing-l);
-    padding-bottom: var(--spacing-m);
-}
-
-.progress-bar-steps::before {
-    content: '';
-    position: absolute;
-    bottom: 27px; 
-    left: 70px;  /* Stops the line from hitting the far left edge */
-    right: 70px; /* Stops the line from hitting the far right edge */
-    
-    height: 3px;
-    background: var(--color-border);
-    z-index: 1;
-}
-
-.step {
-    flex-grow: 1; /* Distribute steps evenly */
-    text-align: center;
-    position: relative;
-    z-index: 2;
+   display: flex;
+    flex-wrap: nowrap; /* Force them to stay in ONE line */
+    min-width: max-content; /* Ensure they don't squish */
+    gap: 15px;
+    padding: 0 20px;
 }
 
 /* Base style for step icon */
@@ -824,7 +823,18 @@ lesson-layout {
 
 /* --- Mobile Menu Active State (Feature 1) --- */
 @media (max-width: 900px) {
+    .progress-bar-steps::before {
+        display: none; /* The static background line often breaks on mobile */
+    }
     
+    .step {
+        flex: 0 0 60px; /* Gives each dot a fixed width so they don't overlap */
+    }
+    
+    .step-label {
+        font-size: 10px;
+        bottom: 40px;
+    }
    
     /* This is the "HIDDEN" state for your menu */
     .main-nav {
@@ -1149,7 +1159,131 @@ lesson-layout {
     /* Ensure content inside is visible */
     color: var(--color-primary-text); 
 }
+/* --- CONSISTENT AUTH STYLING --- */
 
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: var(--spacing-xl);
+}
+
+.auth-card {
+    background: #ffffff;
+    padding: var(--spacing-xxl);
+    border-radius: var(--border-radius-s);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    border: 2px solid var(--color-border);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: var(--spacing-l);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-text) !important;
+    font-size: var(--font-size-s);
+}
+
+/* Force Visibility of Input Boxes */
+.auth-form input {
+    width: 100% !important;
+    height: 48px !important;
+    padding: 12px !important;
+    border: 2px solid var(--color-border) !important;
+    border-radius: var(--border-radius-s) !important;
+    font-size: var(--font-size-n) !important;
+    background-color: #ffffff !important; 
+    color: #252525 !important;
+    display: block !important;
+}
+
+.auth-form input:focus {
+    border-color: var(--color-accent-primary) !important;
+    outline: none;
+}
+
+.auth-button-group {
+    display: flex;
+    gap: var(--spacing-m);
+    margin-top: var(--spacing-s);
+}
+
+.auth-button-group .button {
+    flex: 1;
+}
+
+/* Ensure secondary button text is visible */
+.button-secondary {
+    background-color: transparent !important;
+    color: var(--color-accent-secondary) !important;
+    border: 2px solid var(--color-accent-secondary) !important;
+}
+
+.button-secondary:hover {
+    background-color: var(--color-accent-secondary) !important;
+    color: #ffffff !important;
+}
+.journal-input-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.journal-textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    font-size: var(--font-size-n);
+    font-family: inherit;
+    resize: vertical;
+}
+
+.journal-textarea:focus {
+    border-color: var(--color-accent-secondary);
+    outline: none;
+}
+.problem-journal-grid {
+    display: grid;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.problem-card {
+    background: #fdfdfd;
+    border-left: 5px solid var(--color-accent-secondary);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.problem-tag {
+    font-size: var(--font-size-xs);
+    font-weight: bold;
+    color: var(--color-accent-secondary);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
 
 @keyframes fadeIn {
     from { opacity: 0; }

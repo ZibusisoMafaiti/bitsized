@@ -1,4 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { supabase } from './supabaseClient';
+import Login from './components/Login';
 
 // 1. Import my persistent layout components
 import Navbar from './components/Navbar.jsx';
@@ -23,48 +26,47 @@ import Applications from "./pages/Applications";
  * creating a seamless "Single Page Application" feel.
  */
 function App() {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Check for active session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Listen for login/logout changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  
   return (
     <div className="app-layout">
-      {/* I placed the Navbar OUTSIDE the <Routes>. 
-         This means it stays on the screen forever, no matter what page the user clicks.
-      */}
-      <Navbar />
-
-      {/* This is the "Dynamic Screen" area. 
-         I configured React Router here to watch the URL bar and render only 
-         the component that matches the current address.
-      */}
+      <Navbar session={session} />
+      
       <Routes>
-        
-        {/* Landing Page: mysite.com/ */}
         <Route path="/" element={<Home />} />
-
-        {/* Static Content Pages */}
         <Route path="/about" element={<AboutUs />} />
         <Route path="/bots" element={<Bots />} />
-
-        {/* The Course Catalog: mysite.com/adventures */}
-        <Route path="/adventures" element={<Adventures />} />
-
-        {/* ---------------------------------------------------------------
-           MY DYNAMIC LESSON ROUTE
-           ---------------------------------------------------------------
-           I updated this path to accept THREE variables:
-           1. :courseId -> The broad topic (e.g., 'wild-robot')
-           2. :lessonId -> The specific chapter (e.g., 'lesson-1')
-           3. :slideId  -> The specific step index (e.g., '0', '1', '2')
-           
-           This structure allows me to deeply link to any specific moment in 
-           any lesson, which was critical for fixing the "Lesson Not Found" errors.
-        */}
-        <Route path="/adventures/:courseId/:lessonId/:slideId" element={<LessonPlayer />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/applications" element={<Applications />} />
         
+        {/* WE ONLY LOCK THESE TWO ROUTES */}
+        <Route 
+          path="/adventures" 
+          element={session ? <Adventures /> : <Login />} 
+        />
+        <Route 
+          path="/adventures/:courseId/:lessonId/:slideId" 
+          element={session ? <LessonPlayer session={session} /> : <Login />} 
+        />
 
+        <Route path="/login" element={<Login />} />
       </Routes>
 
-      {/* Like the Navbar, I keep the Footer persistent at the bottom of every view. */}
       <Footer />
     </div>
   );

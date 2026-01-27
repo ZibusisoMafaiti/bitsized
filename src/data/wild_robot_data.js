@@ -218,33 +218,59 @@ const wildRobotCourse = {
                     type: "lesson",
                     title: "mBot2 Sensors: Eyes & Ears",
                     bodyText: "SENSING: The mBot2 has an Ultrasonic Sensor to measure distance (preventing crashes) and a Quad RGB Sensor to detect colors and lines. These are like its eyes and ears.",
-                    mediaSource: "/assets/images/ultrasonic_sensor.png" // Updated path to standard public folder
+                    mediaSource: "assets/images/ultrasonic_sensor.png" // Updated path to standard public folder
                 },
                 {
                     type: "lesson",
                     title: "mBot2 CyberPi: The Brain",
                     bodyText: "PLANNING: The CyberPi is the main computer board. It processes the data gathered by the sensors and runs your code to decide what the robot should do next.",
-                    mediaSource: "/assets/images/mbot1_brain.png" // Updated path to standard public folder
+                    mediaSource: "assets/images/mbot1_brain.png" // Updated path to standard public folder
                 },
                 {
                     type: "lesson",
                     title: "mBot2 Actuators: Muscles & Voice",
                     bodyText: "ACTING: Once a plan is made, the mBot2 uses Encoder Motors to drive precisely and a Speaker and Screen on the CyberPi to communicate with you. It doesn't just drive blindly; it thinks about where it's going!",
-                    mediaSource: "/assets/images/mbot-response.png" // Updated path to standard public folder
+                    mediaSource: "assets/images/mbot-response.png" // Updated path to standard public folder
                 }
             ]
         },
-        "lesson-2": {
-            title: "Lesson 2: Movement Basics",
-            slides: [
-                {
-                    title: "Coming Soon",
-                    type: "lesson",
-                    bodyText: "This lesson is under construction. Check back soon to learn how to move your mBot!",
-                    mediaSource: ""
-                }
-            ]
+       "lesson-2": {
+    title: "Lesson 2: The Problem Hunter",
+    slides: [
+        {
+            type: "lesson",
+            title: "Observation is a Superpower",
+            bodyText: "In 'The Wild Robot', Roz had to observe the island to survive. As an engineer, your superpower is noticing things that others ignore. We are looking for 'Pain Points'—things that are difficult, messy, or unfair.",
+            mediaSource: "assets/images/L2_observation.png"
+        },
+        {
+            type: "input",
+            title: "Problem Hunt: My School",
+            bodyText: "What is one thing at your school that is frustrating for students or teachers? (e.g., heavy doors, lost items, cold classrooms)",
+            placeholder: "I noticed that...",
+            category: "school"
+        },
+        {
+            type: "input",
+            title: "Problem Hunt: My Community",
+            bodyText: "Think about your neighborhood in Calgary. What is a problem you see people facing every day?",
+            placeholder: "I noticed that...",
+            category: "community"
+        },
+        {
+            type: "input",
+            title: "Problem Hunt: My Country",
+            bodyText: "What is a big challenge facing our country right now that you wish you could help fix?",
+            placeholder: "I noticed that...",
+            category: "country"
+        },
+        {
+            type: "summary_list", // Our new "Master List" type
+            title: "Your Problem Hunter Journal",
+            bodyText: "You have successfully identified three challenges in your world. Look at your list below. Which one do you feel most passionate about?"
         }
+    ]
+}
     }
 };
 
