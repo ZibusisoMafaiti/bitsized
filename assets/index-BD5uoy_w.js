@@ -60,14 +60,14 @@ We use **IF-THEN-ELSE** statements:
 * **IF** I see a wall... **THEN** Turn Left. 
 * **ELSE** (No wall)... Run Forward. 
 
-Let's test this logic.`,mediaSource:"/assets/images/logic_diagram.png"},{type:"code_mission",title:"Mission 1: Obstacle Avoidance",bodyText:`**Objective:** Build a robot that never crashes. 
+Let's test this logic.`,mediaSource:"/assets/images/logic_diagram.png"},{type:"code_mission",title:"Mission 1: The Square Drive",bodyText:"Navigate in a perfect square...",helpContent:{title:"💡 Mission 1 Clue",text:"Don't write the code 4 times! Look for the orange Control block called **'Repeat'**.",image:"public/assets/images/square-movement.png"}},{type:"code_mission",title:"Mission 2: Obstacle Avoidance",bodyText:`**Objective:** Build a robot that never crashes. 
 
 **The Logic:** 
 1. Use a **Forever** loop (to keep checking). 
 2. Inside, put an **If-Then-Else** block. 
 3. **Condition:** If Ultrasonic Sensor (Port 3) distance < 10cm. 
 4. **Action:** Turn Right. 
-5. **Else:** Run Forward at speed 100.`,hintImage:"/assets/images/hint_obstacle_empty.png",helpContent:{title:"🛡️ Avoidance Code Solution",text:"Here is the exact code block structure. Notice how the 'Move Forward' block goes in the 'Else' section, meaning 'If NOT about to crash, keep driving'.",image:"/assets/images/solution_obstacle_avoidance.png"}},{type:"code_mission",title:"Mission 2: Track Patrol",bodyText:`**Objective:** Follow a black line automatically. 
+5. **Else:** Run Forward at speed 100.`,hintImage:"",helpContent:{title:"🛡️ Avoidance Code Solution",text:"Here is the exact code block structure. Notice how the 'Move Forward' block goes in the 'Else' section, meaning 'If NOT about to crash, keep driving'.",image:"/assets/images/obstacle-avoidance.png"}},{type:"code_mission",title:"Mission 3: Track Patrol",bodyText:`**Objective:** Follow a black line automatically. 
 
 **The Sensor:** The Line Follower (Port 2). 
 * **Value 0:** Both sensors on black (Center). 
@@ -77,11 +77,11 @@ Let's test this logic.`,mediaSource:"/assets/images/logic_diagram.png"},{type:"c
 **Task:** Write code to keep the robot on the black tape.`,hintImage:"/assets/images/hint_line_follower.png",helpContent:{title:"🛤️ Patrol Code Solution",text:`This requires nested logic (an If inside an If). 
 1. If Line Follower = 2 (Right is white) -> Turn Left. 
 2. If Line Follower = 1 (Left is white) -> Turn Right. 
-3. Else -> Forward.`,image:"/assets/images/solution_line_follower.png"}},{type:"code_mission",title:"Mission 3: The Roz Challenge",bodyText:`**Final Test:** Combine your skills! 
+3. Else -> Forward.`,image:"/assets/images/line-follower-sensor.png"}},{type:"code_mission",title:"Mission 4: The Roz Challenge",bodyText:`**Final Test:** Combine your skills! 
 
 Can you write a program where the robot follows the line, BUT if it sees an object (Ultrasonic < 10cm) it stops and lights up Red? 
 
-**Hint:** You will need two 'If' statements inside your Forever loop.`,helpContent:{title:"🏆 The Master Solution",text:"Order matters! Put the 'Obstacle Check' FIRST. If that is true (distance < 10), the robot stops immediately. If false, it proceeds to the Line Follower logic.",image:"/assets/images/solution_roz_challenge.png"}},{type:"lesson",title:"Mission Accomplished",bodyText:`You have successfully programmed an autonomous agent. 
+**Hint:** You will need two 'If' statements inside your Forever loop.`,helpContent:{title:"🏆 The Master Solution",text:"Order matters! Put the 'Obstacle Check' FIRST. If that is true (distance < 10), the robot stops immediately. If false, it proceeds to the Line Follower logic.",image:"/assets/images/obstacle-avoidance.png"}},{type:"lesson",title:"Mission Accomplished",bodyText:`You have successfully programmed an autonomous agent. 
 
 **Reflection:** How is this different from remote controlling the bot? 
 (A) The bot reacts faster than a human. 
