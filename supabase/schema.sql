@@ -1,6 +1,6 @@
 -- BitSized database schema
 -- Reconstructed from the queries in src/ after the original Supabase project was lost.
--- Run this once in a new project: Supabase dashboard -> SQL Editor -> paste -> Run.
+-- Safe to run more than once. Run it in the project: Supabase dashboard -> SQL Editor -> paste -> Run.
 
 -- Contact form submissions (src/pages/Contact.jsx).
 -- The table name is capitalised in the app, so it must stay quoted here.
@@ -16,6 +16,7 @@ alter table public."Messages" enable row level security;
 
 -- Anyone visiting the site can send a message, but nobody can read them
 -- through the public API (read them in the dashboard instead).
+drop policy if exists "Anyone can send a message" on public."Messages";
 create policy "Anyone can send a message"
   on public."Messages" for insert
   to anon, authenticated
@@ -36,11 +37,13 @@ create index if not exists student_submissions_user_lesson_idx
 alter table public.student_submissions enable row level security;
 
 -- Signed-in students can only save and read their own entries.
+drop policy if exists "Students insert their own submissions" on public.student_submissions;
 create policy "Students insert their own submissions"
   on public.student_submissions for insert
   to authenticated
   with check (auth.uid() = user_id);
 
+drop policy if exists "Students read their own submissions" on public.student_submissions;
 create policy "Students read their own submissions"
   on public.student_submissions for select
   to authenticated
